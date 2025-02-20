@@ -16,8 +16,8 @@ if 'vots' not in st.session_state:
     st.session_state.temps = []
 
 # Títol principal
-st.title("📊 Valoració de la Sessió")
-st.subheader("Com t'ha semblat la classe d'avui?")
+st.title("📊 Valoració de l'espai de cercle")
+st.subheader("Qué t'ha semblat avui?")
 
 # Estil CSS per fer els botons més grans i quadrats
 st.markdown("""
@@ -35,22 +35,17 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Botons de votació amb emojis
-if st.button("😄 Molt bé!", use_container_width=True):
-    st.session_state.vots.append(4)
-    st.session_state.temps.append(datetime.now())
-    st.success("Gràcies pel teu vot!")
-    
-if st.button("🙂 Bé", use_container_width=True):
+if st.button("😄 M'ha agradat!", use_container_width=True):
     st.session_state.vots.append(3)
     st.session_state.temps.append(datetime.now())
     st.success("Gràcies pel teu vot!")
     
-if st.button("😐 Regular", use_container_width=True):
+if st.button("😐 M'ha agradat a mitges", use_container_width=True):
     st.session_state.vots.append(2)
     st.session_state.temps.append(datetime.now())
     st.success("Gràcies pel teu vot!")
     
-if st.button("☹️ Malament", use_container_width=True):
+if st.button("☹️ No m'ha agradat", use_container_width=True):
     st.session_state.vots.append(1)
     st.session_state.temps.append(datetime.now())
     st.success("Gràcies pel teu vot!")
@@ -62,19 +57,18 @@ if st.session_state.vots:
         'hora': st.session_state.temps
     })
     df['valoració'] = df['valoració'].map({
-        1: 'Malament',
-        2: 'Regular',
-        3: 'Bé',
-        4: 'Molt bé'
+        1: 'No m\'ha agradat',
+        2: 'M\'ha agradat a mitges',
+        3: 'M\'ha agradat'
     })
     
     fig = px.histogram(
         df,
         x='valoració',
         title="Resultats de la votació",
-        category_orders={"valoració": ["Malament", "Regular", "Bé", "Molt bé"]},
+        category_orders={"valoració": ["No m'ha agradat", "M'ha agradat a mitges", "M'ha agradat"]},
         color='valoració',
-        color_discrete_sequence=['#ff9999', '#ffcc99', '#99ff99', '#99ccff']
+        color_discrete_sequence=['#007DA4', '#40BF9A', '#FFD948']
     )
     
     # Fer la gràfica més alta
@@ -94,10 +88,9 @@ if st.button("💾 Descarregar resultats"):
             
             # Convertir els números a text descriptiu
             df['valoració'] = df['valoració'].map({
-                1: 'Malament',
-                2: 'Regular',
-                3: 'Bé',
-                4: 'Molt bé'
+                1: 'No m\'ha agradat',
+                2: 'M\'ha agradat a mitges',
+                3: 'M\'ha agradat'
             })
             
             # Formatar la data i hora en format llegible
