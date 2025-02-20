@@ -18,7 +18,7 @@ if 'vots' not in st.session_state:
 
 # Títol principal
 st.title("📊 Valoració de l'espai de cercle")
-st.subheader("Qué t'ha semblat avui?")
+st.subheader("Què t'ha semblat avui?")
 
 # Estil CSS per fer els botons més grans i quadrats
 st.markdown("""
