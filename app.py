@@ -6,6 +6,7 @@ import io
 from PIL import Image
 import os
 from openpyxl.drawing.image import Image as XLImage
+from zoneinfo import ZoneInfo
 
 # Configuració inicial de la pàgina
 st.set_page_config(page_title="Sistema de Valoració - Cercle", layout="wide")
@@ -37,17 +38,17 @@ st.markdown("""
 # Botons de votació amb emojis
 if st.button("😄 M'ha agradat!", use_container_width=True):
     st.session_state.vots.append(3)
-    st.session_state.temps.append(datetime.now())
+    st.session_state.temps.append(datetime.now(ZoneInfo("Europe/Madrid")))
     st.success("Gràcies pel teu vot!")
     
 if st.button("😐 M'ha agradat a mitges", use_container_width=True):
     st.session_state.vots.append(2)
-    st.session_state.temps.append(datetime.now())
+    st.session_state.temps.append(datetime.now(ZoneInfo("Europe/Madrid")))
     st.success("Gràcies pel teu vot!")
     
 if st.button("☹️ No m'ha agradat", use_container_width=True):
     st.session_state.vots.append(1)
-    st.session_state.temps.append(datetime.now())
+    st.session_state.temps.append(datetime.now(ZoneInfo("Europe/Madrid")))
     st.success("Gràcies pel teu vot!")
 
 # Mostrar gràfica si hi ha vots
@@ -96,8 +97,8 @@ if st.button("💾 Descarregar resultats"):
             # Formatar la data i hora en format llegible
             df['data_i_hora'] = df['data_i_hora'].dt.strftime('%d/%m/%Y %H:%M:%S')
             
-            # Crear Excel amb timestamp
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            # Crear Excel amb timestamp en CET
+            timestamp = datetime.now(ZoneInfo("Europe/Madrid")).strftime("%Y%m%d_%H%M%S")
             nom_arxiu = f'resultats_votacio_{timestamp}.xlsx'
             
             # Guardar només les dades en format Excel
