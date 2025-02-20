@@ -69,7 +69,7 @@ if st.session_state.vots:
         title="Resultats de la votació",
         category_orders={"valoració": ["No m'ha agradat", "M'ha agradat a mitges", "M'ha agradat"]},
         color='valoració',
-        color_discrete_sequence=['#007DA4', '#40BF9A', '#FFD948']
+        color_discrete_sequence=['#FFD948', '#40BF9A','#007DA4']
     )
     
     # Fer la gràfica més alta
