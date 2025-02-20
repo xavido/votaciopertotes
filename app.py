@@ -8,7 +8,7 @@ import os
 from openpyxl.drawing.image import Image as XLImage
 
 # Configuració inicial de la pàgina
-st.set_page_config(page_title="Sistema de Votació", layout="wide")
+st.set_page_config(page_title="Sistema de Valoració - Cercle", layout="wide")
 
 # Inicialitzar l'estat de la sessió si no existeix
 if 'vots' not in st.session_state:
